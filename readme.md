@@ -1,7 +1,7 @@
 ## About This Repository
 During my summer internship, I tried to read the station observational data from the Atmospheric Science Research
-and Application Databank. (大氣科學研究與應用資料庫，或稱大氣水文資料庫) However, I found it is difficult to access, so I
-published the code I used.
+and Application Databank(大氣科學研究與應用資料庫，或稱大氣水文資料庫). However, I found it is difficult to access, so I
+fix some bug and published the code I used.
 
 By this reader, you can:
 * Quick load ASRAD data with mutil-threads
