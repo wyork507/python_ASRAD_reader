@@ -74,5 +74,19 @@ Other parameter of `read_folder_selected`:
 * `selected_cols`, optional, default is `["TX01", "PP01", "PS01", "RH01", "WD01", "WD02"]`.
 * `station_number`, optional, default is 467490.
 
-## A
+## Storage as .csv file
+1. To normal .csv via DataFrame function:
+   ```python3
+   df.to_csv("datas.csv")
+   ```
+   For detail, please refer to [pandas document](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html).
+2. To special .csv, which could load by this reader
+   ```python3
+   df.to_datasets_csv("datas.csv")
+   ```
+   And use the command below to load back.
+   ```python3
+   df = Reader.DataSet.read_dataset_csv("datas.csv")
+   ```
 
+## 
