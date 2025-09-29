@@ -1,75 +1,9 @@
-"""
-This dataset is design for process CWA longtime observe data from https://asrad.pccu.edu.tw.
----
-Created by wyork507. (contact information: https://wyork507.site)
-"""
 from __future__ import annotations
-from enum import Enum
-from dataclasses import dataclass
 from pathlib import Path
 import concurrent.futures
 import numpy as np
 import pandas as pd
 import threading
-
-
-@dataclass(frozen = True)
-class Encoding:
-    Big5: [str]
-    UTF8: [str]
-
-
-class SpecialValue(Enum):
-    # 儀器故障待修
-    WaitFix = Encoding(["-9991"], ["-999.1"])
-    # 資料累計於後
-    InBelow = Encoding(["-9996"], ["-9.6", "-999.6"])
-    # 因故障而無資料
-    Trouble = Encoding(None, ["-9.5", "-99.5", "-999.5", "-9999.5"])
-    # 因不明原因或故障而無資料(Big5) # 因不明原因而無資料(UTF8)
-    Unknown = Encoding(["-9997"], ["-9.7", "-99.7", "-999.7", "-9999.7"])
-    # 雨跡(Trace)
-    OnTrace = Encoding(["-9998"], ["-9.8"])
-    # 未觀測而無資料
-    NoInObs = Encoding(["-9999"], ["None"])
-
-
-class NanMode(Enum):
-    """
-        ObsEmpty : any reason without observation \n
-        AllEmpty : all but without trace \n
-        NotExist : no data because no observation
-        AllValue : all special value \n
-    """
-    @staticmethod
-    def _merge(*values: SpecialValue.value):
-        big5 = []
-        utf8 = []
-        for val in values:
-            big5 += val.Big5 or []
-            utf8 += val.UTF8 or []
-        return Encoding(big5, utf8)
-    # Any reason without observation
-    ObsEmpty = _merge(SpecialValue.NoInObs.value,
-                      SpecialValue.WaitFix.value,
-                      SpecialValue.Trouble.value,
-                      SpecialValue.Unknown.value)
-    # All but without trace
-    AllEmpty = _merge(SpecialValue.NoInObs.value,
-                      SpecialValue.WaitFix.value,
-                      SpecialValue.Trouble.value,
-                      SpecialValue.Unknown.value,
-                      SpecialValue.InBelow.value)
-    # No data because no observation
-    NotInObs = _merge(SpecialValue.NoInObs.value)
-    # All cases
-    AllValue = _merge(SpecialValue.NoInObs.value,
-                      SpecialValue.WaitFix.value,
-                      SpecialValue.Trouble.value,
-                      SpecialValue.Unknown.value,
-                      SpecialValue.InBelow.value,
-                      SpecialValue.OnTrace.value)
-
 
 def find_all_folder_path(folder_path: str | Path) -> list[Path]:
     """
@@ -97,7 +31,6 @@ def find_all_folder_path(folder_path: str | Path) -> list[Path]:
             path_list.extend(find_all_folder_path(item))
     # Ensure no duplicate paths are returned
     return list(set(path_list))
-
 
 class DataSet(pd.DataFrame):
     @staticmethod
