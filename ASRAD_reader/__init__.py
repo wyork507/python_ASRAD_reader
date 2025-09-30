@@ -9,6 +9,6 @@ Created by wyork507. (contact information: https://wyork507.site)
 __version__ = "0.4.1"
 
 from ASRAD_reader.NanMode import NanMode
-from ASRAD_reader.Dataset import DataSet
+from ASRAD_reader.ObservationalDataset import ObservationalDataset
 
-__all__ = ['NanMode', 'DataSet']
+__all__ = ['NanMode', 'ObservationalDataset']

@@ -1,38 +1,16 @@
 from __future__ import annotations
 from pathlib import Path
+from ASRAD_reader.NanMode import NanMode
+from ASRAD_reader.LoadingLib import find_all_folder_path
 import concurrent.futures
 import numpy as np
 import pandas as pd
 import threading
 
-def find_all_folder_path(folder_path: str | Path) -> list[Path]:
-    """
-    Return a list of folder paths that contain files (excluding folders that only contain sub-folders).
-    :param folder_path: The initial folder to search.
-    :return: A list of folder paths containing files.
-    """
-    folder_path = Path(folder_path)
-    path_list = []
-    
-    # Ensure the input path is a directory
-    if not folder_path.is_dir():
-        raise ValueError(f"The provided path '{folder_path}' is not a valid directory.")
-    
-    for item in folder_path.iterdir():
-        if item.is_file():
-            # Skip system files like ".DS_Store"
-            if item.suffix == ".DS_Store":
-                continue
-            # Add the folder to the list if a file is found
-            path_list.append(folder_path)
-            # Stop iterating over this folder if a file is found
-        elif item.is_dir():
-            # Recursively search subdirectories
-            path_list.extend(find_all_folder_path(item))
-    # Ensure no duplicate paths are returned
-    return list(set(path_list))
+from ASRAD_reader.StationObservationalData import StationObservationalData
 
-class DataSet(pd.DataFrame):
+
+class ObservationalDataset(pd.DataFrame):
     @staticmethod
     def _parse_datetime_with_24h(datetime_str):
         if datetime_str[-2:] == '24':
@@ -260,71 +238,7 @@ class DataSet(pd.DataFrame):
             print(f"====  Finish   ==================")
             return cls(temper_data, path)
     
-    """
-    Section:
-        Station
-    """
-    class StationData(pd.DataFrame):
-        """
-        Represents data for a specific station, inheriting from pd.DataFrame.
-        """
-        def __init__(self, data: pd.DataFrame) -> None:
-            """
-            :param data:
-            """
-            try:
-                super().__init__(data)
-            except Exception as e:
-                print(e)
-        
-        @classmethod
-        def build(cls, data):
-            """
-            Creates a StationData object from a DataFrame.
-            """
-            return cls(data)
-        
-        @property
-        def to_dataset(self):
-            return DataSet.transformation(self.value())
-        
-        @property
-        def drop_nan(self) -> DataSet.StationData:
-            """
-            Drops rows with all NaN values (except for station and datetime).
-            """
-            data = self.copy()  # Create a copy to avoid modifying the original
-            data.dropna(
-                subset = [col for col in data.columns if col not in ["# stno"]],
-                how = "all",
-                inplace = True,
-            )
-            return self.build(data)  # Return a new StationData object
-        
-        def get_item_with_time(self, cols: list[str]) -> DataSet.StationData | None:
-            """
-            :param cols:
-            :return: data with time and station information
-            """
-            try:
-                return self.build(self[["# stno"] + cols])
-            except Exception as e:
-                print(e)
-                return None
-        
-        def __getitem__(self, item):
-            """
-            Allows accessing data using the [] operator.
-            """
-            return super().__getitem__(item)
-        
-        def __repr__(self):
-            return super().__repr__()
-        
-        def __str__(self):
-            return "StationData: \n" + super().__str__()
-    
-    def find_station(self, number: int) -> StationData | None:
+    def find_station(self, number: int) -> StationObservationalData | None:
         """
         Filters data by station number
         :param number: which station number you want to get
@@ -332,11 +246,11 @@ class DataSet(pd.DataFrame):
         return self.StationData(self.loc[self["# stno"] == number].copy())
     
     @property
-    def taichung_station(self) -> StationData | None:
+    def taichung_station(self) -> StationObservationalData | None:
         return self.find_station(467490)
     
     @property
-    def taipei_station(self) -> StationData | None:
+    def taipei_station(self) -> StationObservationalData | None:
         return self.find_station(466920)
     
     @property
@@ -425,7 +339,7 @@ class DataSet(pd.DataFrame):
                 print(e)
         return pd.DataFrame(results)
     
-    def get_item_with_time(self, cols: list[str]) -> DataSet.StationData | None:
+    def get_item_with_time(self, cols: list[str]) -> ObservationalDataset.StationData | None:
         """
         :param cols:
         :return: data with time and station information
@@ -468,9 +382,9 @@ class DataSet(pd.DataFrame):
             raise IOError(f"Error saving dataset to CSV: {e}")
     
     def __add__(self, other):
-        if isinstance(other, DataSet):
+        if isinstance(other, ObservationalDataset):
             try:
-                return DataSet(pd.concat([self, other], ignore_index = True), path = "N/A: Added")
+                return ObservationalDataset(pd.concat([self, other], ignore_index = True), path = "N/A: Added")
             except Exception as e:
                 print(e)
         else:
