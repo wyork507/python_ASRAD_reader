@@ -1,0 +1,27 @@
+package:
+  name: asrad_reader
+  version: 0.4.1
+
+source:
+  path: ..
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python >=3.11.7
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - python >=3.11.7
+    - numpy >=1.26.2
+    - pandas >=2.1.4
+
+about:
+  summary: A toolkit for processing CWA long-term observation data.
+  home: https://wyork507.site
+  license: MIT
+  license_file: LICENSE
