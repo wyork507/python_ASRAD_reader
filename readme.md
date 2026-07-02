@@ -34,7 +34,12 @@ test_read/
 * pandas 2.1.4 or higher
 
 ## Installation
-Install the package in editable mode from the repository root:
+For published releases, users should install the package from PyPI:
+```python3
+pip install ASRAD_reader
+```
+
+For local development in this repository, install in editable mode from the repository root:
 ```python3
 pip install -e .
 ```
