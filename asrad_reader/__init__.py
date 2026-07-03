@@ -6,7 +6,7 @@ Created by wyork507. (contact information: https://wyork507.site)
 
 # asrad-reader package initialization
 
-__version__ = "0.4.2"
+__version__ = "0.4.5"
 
 from .nan_mode import NanMode
 from .obs_data_frame import NanPeriod, ObsDataFrame, ObservePattern
