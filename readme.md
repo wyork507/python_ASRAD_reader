@@ -1,19 +1,19 @@
 ## About This Repository
-`ASRAD_reader` is a small Python package for reading CWA long-term observational data from ASRAD and turning it into a pandas-friendly dataset.
+`asrad-reader` is a small Python package for reading CWA long-term observational data from ASRAD and turning it into a pandas-friendly dataset.
 
 This project is built around two ideas:
 * quick loading of many observation files with multi-threading
 * convenient time-series processing through a pandas `DataFrame` extension
 
 The main public entry points are:
-* `ASRAD_reader.load_file`
-* `ASRAD_reader.load_folder`
-* `ASRAD_reader.NanMode`
+* `asrad-reader.load_file`
+* `asrad-reader.load_folder`
+* `asrad-reader.NanMode`
 * the `obs` DataFrame accessor on returned datasets
 
 ## Current Structure
 ```text
-ASRAD_reader/
+asrad_reader/
    __init__.py
    loader.py
    nan_mode.py
@@ -36,7 +36,7 @@ test_read/
 ## Installation
 For published releases, users should install the package from PyPI:
 ```python3
-pip install ASRAD_reader
+pip install asrad-reader
 ```
 
 For local development in this repository, install in editable mode from the repository root:
@@ -49,7 +49,7 @@ Import the package and the NaN mode enum:
 ```python3
 from pathlib import Path
 
-from ASRAD_reader import NanMode, load_file, load_folder
+from asrad-reader import NanMode, load_file, load_folder
 ```
 
 ## Read a File
