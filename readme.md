@@ -13,7 +13,7 @@ The main public entry points are:
 
 ## Current Structure
 ```text
-asrad_reader/
+asrad-reader/
    __init__.py
    loader.py
    nan_mode.py
