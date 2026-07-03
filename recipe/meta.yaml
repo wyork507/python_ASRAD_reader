@@ -1,6 +1,6 @@
 package:
-  name: asrad_reader
-  version: 0.4.1
+  name: asrad-reader
+  version: 0.4.2
 
 source:
   path: ..
@@ -21,7 +21,7 @@ requirements:
     - pandas >=2.1.4
 
 about:
-  summary: A toolkit for processing CWA long-term observation data.
-  home: https://wyork507.site
+  summary: A toolkit for processing CWA long-term observation station data.
+  home: https://github.com/wyork507/python_asrad_reader
   license: MIT
   license_file: LICENSE
