@@ -52,3 +52,17 @@ class SpecialValue(StrEnum):
                 return ["-9.8"]
             case s.NoInObs:
                 return ["None"]
+    
+    @property
+    def numerical(self) -> list[float]:
+        """Returns the numerical representation of the special value, if applicable."""
+        s = SpecialValue
+        together = self.big5
+        if self is not s.NoInObs:
+            together += self.utf8
+        return [float(value) for value in together]
+    
+    @staticmethod
+    def all_cases() -> set["SpecialValue"]:
+        """Returns a set of all special values."""
+        return {member for member in SpecialValue}

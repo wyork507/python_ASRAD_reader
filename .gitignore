@@ -167,3 +167,7 @@ cython_debug/
 test.ipynb
 *.csv
 /test_read
+
+# Project
+main.py
+/.idea

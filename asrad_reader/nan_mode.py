@@ -25,4 +25,4 @@ class NanMode(Enum):
     @property
     def utf8(self) -> List[str]:
         """Returns the UTF8 encoding list for all special values in the current NanMode."""
-        return [value for member in self.value for value in member.utf8]    
+        return [value for member in self.value for value in member.utf8]
