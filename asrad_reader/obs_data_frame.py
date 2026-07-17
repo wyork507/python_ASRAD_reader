@@ -190,10 +190,11 @@ class ObsDataFrame:
                 for case in (sv.all_cases() - {sv.OnTrace})
                 for key in (case.big5 + case.utf8 + case.numerical)
             }
-            df[self._value_columns] = df[self._value_columns].replace(replacement)
+            col = self.__get_value_columns(df)
+            df[col] = df[col].replace(replacement)
             return df
         def drop_nan(df: pd.DataFrame) -> pd.DataFrame:
-            return df.dropna(subset=self._value_columns, how="all")
+            return df.dropna(subset=self.__get_value_columns(df), how="all")
         # Filter the DataFrame for the specified station number and columns, then identify and drop NaN values
         df = self.station(station_number)
         df = df.get_items(columns) if columns is not None else df.to_dataframe()
