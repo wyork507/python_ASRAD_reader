@@ -26,3 +26,11 @@ class NanMode(Enum):
     def utf8(self) -> List[str]:
         """Returns the UTF8 encoding list for all special values in the current NanMode."""
         return [value for member in self.value for value in member.utf8]
+    
+    def __str__(self) -> str:
+        cases = ',\n'.join([f'{member.value}' for member in self.value])
+        f_strings = f"NanMode.{self.name}, which includes the following special values: \n{cases}"
+        return f_strings
+
+    def __repr__(self) -> str:
+        return f"NanMode.{self.name}"

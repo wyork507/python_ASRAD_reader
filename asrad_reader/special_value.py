@@ -1,6 +1,4 @@
-from dataclasses import dataclass
 from enum import StrEnum
-from unittest import case
 
 class SpecialValue(StrEnum):
     """
@@ -66,3 +64,9 @@ class SpecialValue(StrEnum):
     def all_cases() -> set["SpecialValue"]:
         """Returns a set of all special values."""
         return {member for member in SpecialValue}
+    
+    def __str__(self) -> str:
+        return self.value
+    
+    def __repr__(self) -> str:
+        return f"SpecialValue.{self.name}"

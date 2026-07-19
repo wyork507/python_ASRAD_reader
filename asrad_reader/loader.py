@@ -7,7 +7,6 @@ import pandas as pd
 
 from .nan_mode import NanMode
 from .special_value import SpecialValue
-from .obs_data_frame import ObsDataFrame
 
 def load_file(
         path: Path,
@@ -35,7 +34,7 @@ def load_file(
         - "skip": Silently skip the file and continue processing.
     Returns
     -------
-    ObsDataFrame
+    pd.DataFrame
         A pandas DataFrame containing the observational data
     
     Raises
