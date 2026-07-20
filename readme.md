@@ -56,7 +56,8 @@ df = load_folder(folder_path)
 ```
 The `load_folder` reads all `.txt` files under the folder with multi-threading, also supported parameters.
 
-### 4. DataFrame Accessor
+## 4. DataFrame Accessor
+
 The returned object is an `DataFrame`, so you can also use the registered accessor:
 ```python
 df.obs.station("467490")
@@ -71,4 +72,4 @@ See the `ObsDataFrame` class to know more method and usage.
 * `ASRAD_reader` is intended to be used as a library, not as a standalone script.
 * For any detail information in parameters, check your IDE hint or source code.
 
-Last update: 2026/07/19.
+Last update: 2026/07/21.

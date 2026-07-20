@@ -56,8 +56,9 @@ df = load_folder(folder_path)
 ```
 此處使用之 `load_folder` 可以讀取在該目錄之下的所有檔案 `.txt` 檔案，並使用多個核心讀取，也有參數可以使用。
 
-### 4. DataFrame Accessor
-讀檔後，會回傳 `DataFrame` 格式，可以使用裝飾器`.obs`將其轉換為`ObsDataFrame`。
+## 4. 從 DataFrame 存取
+
+讀檔後，會回傳 `DataFrame` 格式，可以使用`.obs`將其轉換為`ObsDataFrame`。
 ```python
 df.obs.station("467490")
 df.obs.get_item_with_time(["TX01", "PP01", "RH01"])
@@ -71,4 +72,4 @@ df.obs.find_nan_periods()
 * `ASRAD_reader`是一種庫，而非獨立腳本。
 * 對於各種參數的深入資訊，請參見IDE提示或者是原始碼。
 
-上次更新：2026/07/19。
+上次更新：2026/07/21。
