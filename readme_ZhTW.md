@@ -1,3 +1,5 @@
+[English](readme.md) | 繁體中文
+
 # 關於套件
 本套件（`asrad-reader`）是一個小型的 Python 套件，用於讀取大氣科學研究與應用資料庫（ASRAD, [link](https://asrad.pccu.edu.tw/)）中來自氣象署的長期測站觀測紀錄，轉換成 `Pandas`友善的格式。
 
@@ -57,7 +59,6 @@ df = load_folder(folder_path)
 此處使用之 `load_folder` 可以讀取在該目錄之下的所有檔案 `.txt` 檔案，並使用多個核心讀取，也有參數可以使用。
 
 ## 4. 從 DataFrame 存取
-
 讀檔後，會回傳 `DataFrame` 格式，可以使用`.obs`將其轉換為`ObsDataFrame`。
 ```python
 df.obs.station("467490")

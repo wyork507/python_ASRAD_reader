@@ -1,3 +1,5 @@
+English | [繁體中文](readme_ZhTW.md)
+
 # About This Library
 The `asrad-reader` is a small Python package for reading CWA long-term observational data from ASRAD (Atmospheric Science Research and Appliction Databank ,[link](https://asrad.pccu.edu.tw/)) and turning it into a pandas-friendly dataset.
 
@@ -57,7 +59,6 @@ df = load_folder(folder_path)
 The `load_folder` reads all `.txt` files under the folder with multi-threading, also supported parameters.
 
 ## 4. DataFrame Accessor
-
 The returned object is an `DataFrame`, so you can also use the registered accessor:
 ```python
 df.obs.station("467490")
