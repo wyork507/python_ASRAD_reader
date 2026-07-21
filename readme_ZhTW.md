@@ -1,3 +1,5 @@
+[English](readme.md) | 繁體中文
+
 # 關於套件
 本套件（`asrad-reader`）是一個小型的 Python 套件，用於讀取大氣科學研究與應用資料庫（ASRAD, [link](https://asrad.pccu.edu.tw/)）中來自氣象署的長期測站觀測紀錄，轉換成 `Pandas`友善的格式。
 
