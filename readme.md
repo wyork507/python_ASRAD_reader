@@ -1,7 +1,7 @@
 English | [繁體中文](readme_ZhTW.md)
 
 # About This Library
-The `asrad-reader` is a small Python package for reading CWA long-term observational data from ASRAD (Atmospheric Science Research and Appliction Databank ,[link](https://asrad.pccu.edu.tw/)) and turning it into a pandas-friendly dataset.
+The `asrad-reader`([Repo link](https://github.com/wyork507/python_asrad_reader)) is a small Python package for reading CWA long-term observational data from ASRAD (Atmospheric Science Research and Appliction Databank ,[link](https://asrad.pccu.edu.tw/)) and turning it into a pandas-friendly dataset.
 
 This project is built around two ideas:
 * Quick loading of many observation files with multi-threading
